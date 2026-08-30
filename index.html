@@ -24,10 +24,6 @@ body {
     overflow-x: hidden;
 }
 
-/* =========================
-   FONDO
-========================= */
-
 body::before {
     content: "";
     position: fixed;
@@ -37,10 +33,6 @@ body::before {
         radial-gradient(circle at 80% 80%, rgba(180, 50, 140, 0.06), transparent 35%);
     pointer-events: none;
 }
-
-/* =========================
-   PANTALLAS
-========================= */
 
 .screen {
     width: 100%;
@@ -221,6 +213,11 @@ body::before {
     background: rgba(255, 120, 190, 0.12);
 }
 
+.option:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
 #result {
     display: none;
     font-size: clamp(23px, 5vw, 34px);
@@ -248,7 +245,7 @@ body::before {
 }
 
 /* =========================
-   TRANSICIONES
+   TRANSICIÓN
 ========================= */
 
 .fadeOut {
@@ -504,7 +501,7 @@ body::before {
 <script>
 
 /* =====================================================
-   TEXTO
+   TEXTOS
 ===================================================== */
 
 const introText = `ola nubencia, t hice esto por varias razones
@@ -805,7 +802,10 @@ te espero`
    CONFIGURACIÓN
 ===================================================== */
 
-const velocidadTexto = 22;
+/* 50 = más lento y legible */
+const velocidadTexto = 50;
+
+/* 5 segundos para terminar de leer */
 const pausaLectura = 5000;
 
 
@@ -900,35 +900,25 @@ function esperar(ms) {
 
 
 /* =====================================================
-   REPRODUCCIÓN PRINCIPAL
+   MÚSICA PRINCIPAL
 ===================================================== */
 
-let musicaActual = null;
-
-function reproducirPrincipal() {
-
-    if (!beautifulStranger.ended) {
-
-        musicaActual = beautifulStranger;
-
-    } else {
-
-        musicaActual = valentine;
-
-    }
-
-    musicaActual.play().catch(() => {});
-
-}
+let musicaActual = beautifulStranger;
 
 
-/* Beautiful Stranger → Valentine */
+/* Beautiful Stranger termina → Valentine */
 
 beautifulStranger.addEventListener("ended", () => {
 
-    valentine.currentTime = 0;
+    if (musicaActual === beautifulStranger) {
 
-    valentine.play().catch(() => {});
+        musicaActual = valentine;
+
+        valentine.currentTime = 0;
+
+        valentine.play().catch(() => {});
+
+    }
 
 });
 
@@ -956,14 +946,16 @@ iniciar();
 acceptButton.addEventListener("click", async () => {
 
     /*
-       Importante para iPhone:
-       el audio empieza después del toque
-       del usuario.
+       Este click permite iniciar audio
+       en Safari/iPhone.
     */
 
     beautifulStranger.currentTime = 0;
 
+    musicaActual = beautifulStranger;
+
     beautifulStranger.play().catch(() => {});
+
 
     intro.classList.add("fadeOut");
 
@@ -993,14 +985,14 @@ async function mostrarParte(numero) {
     });
 
 
-    const parte = document.getElementById(
-        "part" + numero
-    );
+    const parte =
+        document.getElementById("part" + numero);
 
     parte.classList.add("active");
 
 
-    const texto = parte.querySelector(".part-text");
+    const texto =
+        parte.querySelector(".part-text");
 
 
     await escribirTexto(
@@ -1012,9 +1004,7 @@ async function mostrarParte(numero) {
     await esperar(pausaLectura);
 
 
-    /*
-       SCREAMER DESPUÉS DE PARTE 4
-    */
+    /* SCREAMER DESPUÉS DE PARTE 4 */
 
     if (numero === 4) {
 
@@ -1023,12 +1013,11 @@ async function mostrarParte(numero) {
         await mostrarParte(5);
 
         return;
+
     }
 
 
-    /*
-       ENCUESTA DESPUÉS DE PARTE 7
-    */
+    /* ENCUESTA DESPUÉS DE PARTE 7 */
 
     if (numero === 7) {
 
@@ -1037,12 +1026,11 @@ async function mostrarParte(numero) {
         await mostrarParte(8);
 
         return;
+
     }
 
 
-    /*
-       SIGUIENTE PARTE
-    */
+    /* SIGUIENTE PARTE */
 
     if (numero < 11) {
 
@@ -1066,21 +1054,15 @@ async function mostrarParte(numero) {
 async function ejecutarScreamer() {
 
     /*
-       Guardamos exactamente dónde quedó
+       Guardamos exactamente dónde estaba
        la canción.
     */
 
     const posicion =
-        musicaActual
-            ? musicaActual.currentTime
-            : beautifulStranger.currentTime;
+        musicaActual.currentTime;
 
 
-    if (musicaActual) {
-
-        musicaActual.pause();
-
-    }
+    musicaActual.pause();
 
 
     story.style.display = "none";
@@ -1112,17 +1094,12 @@ async function ejecutarScreamer() {
 
 
     /*
-       Continuamos la canción exactamente
-       donde se quedó.
+       Regresa exactamente al punto anterior.
     */
 
-    if (musicaActual) {
+    musicaActual.currentTime = posicion;
 
-        musicaActual.currentTime = posicion;
-
-        musicaActual.play().catch(() => {});
-
-    }
+    musicaActual.play().catch(() => {});
 
 }
 
@@ -1135,23 +1112,18 @@ let preguntaActual = 0;
 
 let respuestasCorrectas = 0;
 
+
 async function ejecutarQuiz() {
 
     /*
-       Guardar canción
+       Guardamos dónde quedó la canción.
     */
 
     const posicion =
-        musicaActual
-            ? musicaActual.currentTime
-            : beautifulStranger.currentTime;
+        musicaActual.currentTime;
 
 
-    if (musicaActual) {
-
-        musicaActual.pause();
-
-    }
+    musicaActual.pause();
 
 
     story.style.display = "none";
@@ -1178,6 +1150,14 @@ async function ejecutarQuiz() {
     });
 
 
+    const resultado =
+        document.getElementById("result");
+
+    resultado.style.display = "none";
+
+    resultado.textContent = "";
+
+
     quizAudio.currentTime = 0;
 
     quizAudio.play().catch(() => {});
@@ -1192,7 +1172,7 @@ async function ejecutarQuiz() {
             quizAudio.currentTime = 0;
 
 
-            let mensaje = "";
+            let mensaje;
 
 
             if (respuestasCorrectas === 3) {
@@ -1202,8 +1182,10 @@ async function ejecutarQuiz() {
 
             }
 
-            else if (respuestasCorrectas === 1 ||
-                     respuestasCorrectas === 2) {
+            else if (
+                respuestasCorrectas === 1 ||
+                respuestasCorrectas === 2
+            ) {
 
                 mensaje =
                     "mm no me conoces al 100, mereces q te robe a ragatha 👻";
@@ -1218,14 +1200,15 @@ async function ejecutarQuiz() {
             }
 
 
-            const resultado =
-                document.getElementById("result");
-
-
             resultado.textContent = mensaje;
 
             resultado.style.display = "block";
 
+
+            /*
+               Dejamos 5 segundos para leer
+               el resultado.
+            */
 
             await esperar(5000);
 
@@ -1236,16 +1219,12 @@ async function ejecutarQuiz() {
 
 
             /*
-               Continuar canción
+               Continúa exactamente donde estaba.
             */
 
-            if (musicaActual) {
+            musicaActual.currentTime = posicion;
 
-                musicaActual.currentTime = posicion;
-
-                musicaActual.play().catch(() => {});
-
-            }
+            musicaActual.play().catch(() => {});
 
 
             resolve();
@@ -1317,6 +1296,7 @@ document
             else {
 
                 await esperar(500);
+
 
                 if (window.finalizarQuiz) {
 
