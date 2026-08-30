@@ -6,6 +6,7 @@
 <title>para nubencia ♡</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -24,19 +25,38 @@ body {
     overflow-x: hidden;
 }
 
+/* =========================
+   FONDO
+========================= */
+
 body::before {
     content: "";
     position: fixed;
     inset: 0;
+
     background:
-        radial-gradient(circle at 20% 20%, rgba(255, 80, 170, 0.08), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(180, 50, 140, 0.06), transparent 35%);
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 80, 170, 0.08),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(180, 50, 140, 0.06),
+            transparent 35%
+        );
+
     pointer-events: none;
 }
+
+/* =========================
+   PANTALLA
+========================= */
 
 .screen {
     width: 100%;
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,427 +73,639 @@ body::before {
 }
 
 #introText {
-    max-width: 800px;
+
+    width: min(850px, 90vw);
+
     font-size: clamp(20px, 4vw, 30px);
-    line-height: 1.8;
+
+    line-height: 1.9;
+
     white-space: pre-line;
+
     min-height: 250px;
 }
 
 .cursor {
+
     display: inline-block;
+
     width: 2px;
+
     height: 1em;
+
     background: #ff9dcc;
+
     margin-left: 3px;
+
     animation: blink 0.8s infinite;
 }
 
 @keyframes blink {
+
     50% {
         opacity: 0;
     }
+
 }
 
 #accept {
+
     margin-top: 30px;
+
     padding: 13px 35px;
+
     border-radius: 30px;
+
     border: 1px solid #ff9dcc;
+
     background: transparent;
+
     color: #ffb6d9;
+
     font-size: 17px;
+
     cursor: pointer;
+
     transition: 0.25s;
 }
 
 #accept:hover {
+
     background: rgba(255, 130, 190, 0.12);
+
     transform: scale(1.05);
 }
+
 
 /* =========================
    HISTORIA
 ========================= */
 
 #story {
+
     display: none;
+
     width: 100%;
 }
 
 .part {
+
     min-height: 100vh;
-    padding: 70px 25px;
+
+    padding: 60px 25px;
+
     display: none;
+
     justify-content: center;
+
     align-items: center;
+
     text-align: center;
 }
 
 .part.active {
+
     display: flex;
 }
 
 .part-content {
+
     width: min(850px, 95vw);
 }
 
-.part-title {
-    color: rgba(255, 182, 217, 0.5);
-    font-size: 14px;
-    letter-spacing: 3px;
-    margin-bottom: 35px;
-}
-
 .part-text {
+
     font-size: clamp(18px, 3vw, 25px);
-    line-height: 1.9;
+
+    line-height: 2;
+
     white-space: pre-line;
 }
+
 
 /* =========================
    SCREAMER
 ========================= */
 
 #screamer {
+
     display: none;
+
     position: fixed;
+
     inset: 0;
+
     background: #000;
+
     z-index: 100;
+
     justify-content: center;
+
     align-items: center;
 }
 
 #screamer img {
+
     width: 100%;
+
     height: 100%;
+
     object-fit: contain;
 }
+
 
 /* =========================
    ENCUESTA
 ========================= */
 
 #quiz {
+
     display: none;
+
     position: fixed;
+
     inset: 0;
+
     background: #000;
+
     z-index: 90;
+
     overflow-y: auto;
+
     padding: 40px 20px;
 }
 
 .quiz-content {
+
     width: min(750px, 95vw);
+
     margin: auto;
+
     text-align: center;
 }
 
 #dancingGif {
+
     width: min(250px, 70vw);
+
     max-height: 220px;
+
     object-fit: contain;
+
     margin-bottom: 30px;
 }
 
 .question {
+
     display: none;
 }
 
 .question.active {
+
     display: block;
 }
 
 .question-text {
+
     font-size: clamp(20px, 4vw, 29px);
+
     line-height: 1.6;
+
     margin-bottom: 30px;
 }
 
 .options {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 12px;
 }
 
 .option {
+
     padding: 16px;
+
     border-radius: 15px;
+
     border: 1px solid rgba(255, 182, 217, 0.3);
+
     background: rgba(255,255,255,0.03);
+
     color: #ffb6d9;
+
     font-size: 16px;
+
     cursor: pointer;
+
     transition: 0.2s;
 }
 
 .option:hover {
+
     background: rgba(255, 120, 190, 0.12);
 }
 
 .option:disabled {
+
     cursor: default;
+
     opacity: 0.8;
 }
 
 #result {
+
     display: none;
+
     font-size: clamp(23px, 5vw, 34px);
+
     line-height: 1.6;
+
     margin-top: 30px;
 }
+
 
 /* =========================
    FINAL
 ========================= */
 
 #final {
+
     display: none;
+
     position: fixed;
+
     inset: 0;
+
     background: #000;
+
     justify-content: center;
+
     align-items: center;
 }
 
 #final img {
+
     max-width: 90%;
+
     max-height: 90%;
+
     object-fit: contain;
 }
+
 
 /* =========================
    TRANSICIÓN
 ========================= */
 
 .fadeOut {
+
     animation: fadeOut 0.7s forwards;
 }
 
 @keyframes fadeOut {
+
     to {
         opacity: 0;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- ==================================================
      INTRO
-========================= -->
+================================================== -->
 
 <section id="intro" class="screen">
 
     <div id="introText"></div>
 
-    <button id="accept">Aceptar</button>
+    <button id="accept">
+        Aceptar
+    </button>
 
 </section>
 
 
-<!-- =========================
+
+<!-- ==================================================
      HISTORIA
-========================= -->
+================================================== -->
 
 <main id="story">
 
+
 <section class="part" id="part2">
-<div class="part-content">
-<div class="part-title">PARTE 02 — POR QUÉ HICE ESTO</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part3">
-<div class="part-content">
-<div class="part-title">PARTE 03 — NO TIENES Q DEMOSTRARME NADA</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part4">
-<div class="part-content">
-<div class="part-title">PARTE 04 — LAS BANQUITAS</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part5">
-<div class="part-content">
-<div class="part-title">PARTE 05 — TUS DUDAS</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part6">
-<div class="part-content">
-<div class="part-title">PARTE 06 — NO ES UNA COMPETENCIA</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part7">
-<div class="part-content">
-<div class="part-title">PARTE 07 — LA FERIA</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part8">
-<div class="part-content">
-<div class="part-title">PARTE 08 — SOY NUB</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part9">
-<div class="part-content">
-<div class="part-title">PARTE 09 — LO Q YO QUIERO</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
+
 
 <section class="part" id="part10">
-<div class="part-content">
-<div class="part-title">PARTE 10 — EL TIEMPO</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
 
+
+
 <section class="part" id="part11">
-<div class="part-content">
-<div class="part-title">PARTE 11 — PARA TI</div>
-<div class="part-text"></div>
-</div>
+
+    <div class="part-content">
+
+        <div class="part-text"></div>
+
+    </div>
+
 </section>
+
 
 </main>
 
 
-<!-- =========================
+
+<!-- ==================================================
      SCREAMER
-========================= -->
+================================================== -->
 
 <section id="screamer">
 
-    <img src="imagenes/bonnie.gif" alt="">
-
-</section>
-
-
-<!-- =========================
-     ENCUESTA
-========================= -->
-
-<section id="quiz">
-
-<div class="quiz-content">
-
     <img
-        id="dancingGif"
-        src="imagenes/monito-bailando.gif"
+        src="imagenes/bonnie.gif"
         alt=""
     >
 
-    <!-- PREGUNTA 1 -->
+</section>
 
-    <div class="question active">
 
-        <div class="question-text">
-            cual es mi nombre completo?
+
+<!-- ==================================================
+     ENCUESTA
+================================================== -->
+
+<section id="quiz">
+
+    <div class="quiz-content">
+
+
+        <img
+            id="dancingGif"
+            src="imagenes/monito-bailando.gif"
+            alt=""
+        >
+
+
+
+        <!-- PREGUNTA 1 -->
+
+        <div class="question active">
+
+            <div class="question-text">
+
+                cual es mi nombre completo?
+
+            </div>
+
+
+            <div class="options">
+
+
+                <button
+                    class="option"
+                    data-correct="true"
+                >
+                    Diego Alonso Noriega Hernandez
+                </button>
+
+
+                <button class="option">
+
+                    Diego Alonso Noriega Fernandez
+
+                </button>
+
+
+                <button class="option">
+
+                    Diego Alonso Noriega Sanchez
+
+                </button>
+
+
+                <button class="option">
+
+                    Diego Alfonso Noriega Hernandez
+
+                </button>
+
+
+            </div>
+
         </div>
 
-        <div class="options">
 
-            <button class="option" data-correct="true">
-                Diego Alonso Noriega Hernandez
-            </button>
 
-            <button class="option">
-                Diego Alonso Noriega Fernandez
-            </button>
+        <!-- PREGUNTA 2 -->
 
-            <button class="option">
-                Diego Alonso Noriega Sanchez
-            </button>
+        <div class="question">
 
-            <button class="option">
-                Diego Alfonso Noriega Hernandez
-            </button>
+            <div class="question-text">
+
+                cuando cumplo años
+
+            </div>
+
+
+            <div class="options">
+
+
+                <button class="option">
+
+                    2 de abril
+
+                </button>
+
+
+                <button
+                    class="option"
+                    data-correct="true"
+                >
+
+                    13 de abril
+
+                </button>
+
+
+                <button class="option">
+
+                    21 de abril
+
+                </button>
+
+
+            </div>
 
         </div>
+
+
+
+        <!-- PREGUNTA 3 -->
+
+        <div class="question">
+
+            <div class="question-text">
+
+                q es lo q mas me gusta de helene (sin segundo nombre) gonzales flores?
+
+            </div>
+
+
+            <div class="options">
+
+
+                <button class="option">
+
+                    sus 81 gatos
+
+                </button>
+
+
+                <button class="option">
+
+                    sus outfits
+
+                </button>
+
+
+                <button
+                    class="option"
+                    data-correct="true"
+                >
+
+                    todo d ella 👻
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div id="result"></div>
+
 
     </div>
-
-
-    <!-- PREGUNTA 2 -->
-
-    <div class="question">
-
-        <div class="question-text">
-            cuando cumplo años
-        </div>
-
-        <div class="options">
-
-            <button class="option">
-                2 de abril
-            </button>
-
-            <button class="option" data-correct="true">
-                13 de abril
-            </button>
-
-            <button class="option">
-                21 de abril
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- PREGUNTA 3 -->
-
-    <div class="question">
-
-        <div class="question-text">
-            q es lo q mas me gusta de helene (sin segundo nombre) gonzales flores?
-        </div>
-
-        <div class="options">
-
-            <button class="option">
-                sus 81 gatos
-            </button>
-
-            <button class="option">
-                sus outfits
-            </button>
-
-            <button class="option" data-correct="true">
-                todo d ella 👻
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div id="result"></div>
-
-</div>
 
 </section>
 
 
-<!-- =========================
+
+<!-- ==================================================
      FINAL
-========================= -->
+================================================== -->
 
 <section id="final">
 
@@ -485,24 +717,43 @@ body::before {
 </section>
 
 
-<!-- =========================
+
+<!-- ==================================================
      AUDIOS
-========================= -->
+================================================== -->
 
-<audio id="beautifulStranger" src="musica/beautiful-stranger.mp3"></audio>
+<audio
+    id="beautifulStranger"
+    src="musica/beautiful-stranger.mp3"
+></audio>
 
-<audio id="valentine" src="musica/valentine.mp3"></audio>
 
-<audio id="screamerAudio" src="musica/screamer.mp3"></audio>
+<audio
+    id="valentine"
+    src="musica/valentine.mp3"
+></audio>
 
-<audio id="quizAudio" src="musica/encuesta.mp3"></audio>
+
+<audio
+    id="screamerAudio"
+    src="musica/screamer.mp3"
+></audio>
+
+
+<audio
+    id="quizAudio"
+    src="musica/encuesta.mp3"
+></audio>
+
 
 
 <script>
 
-/* =====================================================
+
+/* ==================================================
    TEXTOS
-===================================================== */
+================================================== */
+
 
 const introText = `ola nubencia, t hice esto por varias razones
 
@@ -515,7 +766,9 @@ pq t kiero
 y ps nomas, porque sí >_<`;
 
 
+
 const parts = {
+
 
 2: `ola otra vez
 
@@ -537,6 +790,8 @@ y aunque quizas esta no es la mejor manera, quiero farmear aura 🔥, aparte sie
 o no?
 no sé viva el funnybunny 🔥`,
 
+
+
 3: `quizás no hace falta aclarar esto pq ya lo hemos hablado, pero no sé, me gusta ponerme filosofal 🐺
 
 no tienes q demostrarme nada
@@ -550,6 +805,8 @@ yo no estoy contigo por lo q puedas darme
 estoy contigo pq eres tu
 
 y eso para mi basta y sobra 😺`,
+
+
 
 4: `hay algo q no quiero q se me olvide mencionar
 
@@ -577,6 +834,8 @@ y no se
 
 creo q nunca te he dicho bien lo mucho q significó ese dia para mi`,
 
+
+
 5: `se q a veces tienes dudas
 
 y esta bien
@@ -592,6 +851,8 @@ puedes tomarte tu tiempo
 puedes ir despacio
 
 yo no voy a querer menos lo q tenemos solo pq tu necesites tiempo para estar segura`,
+
+
 
 6: `y tampoco quiero q pienses q tienes q quererme de la misma manera q yo te quiero, o de la misma manera
 
@@ -614,6 +875,8 @@ ni necesito q hagas todo bien
 solo quiero q seas tu
 
 pq lo q quizás consideras q son defectos tuyos, para mi son lo q mas única t hacen >_<`,
+
+
 
 7: `y ya q toy sacando los recuerdos, tmb m acuerdo d la feria jj
 
@@ -643,6 +906,8 @@ fue nuestro desastre >_<
 
 y creo q por eso lo recuerdo tanto`,
 
+
+
 8: `tambien hay algo q creo q deberia decirte
 
 se q aveces te hago ragebait
@@ -661,7 +926,7 @@ realmente no tengo mala intencion, solo tengo pensamientos tontos pipipiip
 
 y tmb
 
-se q aveces parece q no tengo ganas d hablar contigo
+se q aveces parece q no tengo ganas de hablar contigo
 
 pq te respondo con un "a"
 
@@ -691,6 +956,8 @@ no pienses q ya no quiero hablar contigo
 
 solo soy un nub totno`,
 
+
+
 9: `pq si hay algo q yo tengo claro
 
 quiero q seas tu
@@ -714,6 +981,8 @@ sin tener q ponerle una fecha a nada
 y tampoco quiero q sientas lo de la otra vez, q tu unico proposito es ser pareja de algn o algo pareicod
 
 claro q no, eres una persona muy capaz d muchas cosas, pero obvio q me gustaria acompañarte en tu vida, y obviamente mas como tu pareja >_<`,
+
+
 
 10: `y si necesitas tiempo
 
@@ -739,6 +1008,8 @@ y yo te estoy esperando a ti
 
 aura @chat?
 saqn clip saqn clip 👻`,
+
+
 
 11: `pero tampoco quiero q todo esto se convierta en una presión para ti
 
@@ -795,29 +1066,48 @@ pq yo quiero q sea contigo
 y si tengo q esperarte 10 años
 
 te espero`
+
 };
 
 
-/* =====================================================
+
+/* ==================================================
    CONFIGURACIÓN
-===================================================== */
+================================================== */
 
-/* 50 = más lento y legible */
-const velocidadTexto = 50;
 
-/* 5 segundos para terminar de leer */
+/*
+   VELOCIDAD DEL TEXTO
+
+   80 ms por carácter = tranquilo y legible.
+*/
+
+const velocidadTexto = 80;
+
+
+/*
+   Tiempo después de terminar cada texto.
+*/
+
 const pausaLectura = 5000;
 
 
-/* =====================================================
+
+/* ==================================================
    ELEMENTOS
-===================================================== */
+================================================== */
 
-const intro = document.getElementById("intro");
-const introTextElement = document.getElementById("introText");
-const acceptButton = document.getElementById("accept");
+const intro =
+    document.getElementById("intro");
 
-const story = document.getElementById("story");
+const introTextElement =
+    document.getElementById("introText");
+
+const acceptButton =
+    document.getElementById("accept");
+
+const story =
+    document.getElementById("story");
 
 const beautifulStranger =
     document.getElementById("beautifulStranger");
@@ -841,9 +1131,39 @@ const final =
     document.getElementById("final");
 
 
-/* =====================================================
+
+/* ==================================================
+   MÚSICA PRINCIPAL
+================================================== */
+
+let musicaActual =
+    beautifulStranger;
+
+
+
+/*
+   Beautiful Stranger termina
+   → Valentine comienza automáticamente.
+*/
+
+beautifulStranger.addEventListener(
+    "ended",
+    () => {
+
+        musicaActual = valentine;
+
+        valentine.currentTime = 0;
+
+        valentine.play().catch(() => {});
+
+    }
+);
+
+
+
+/* ==================================================
    ESCRIBIR TEXTO
-===================================================== */
+================================================== */
 
 function escribirTexto(elemento, texto) {
 
@@ -853,11 +1173,15 @@ function escribirTexto(elemento, texto) {
 
         let i = 0;
 
-        const cursor = document.createElement("span");
+
+        const cursor =
+            document.createElement("span");
 
         cursor.className = "cursor";
 
+
         elemento.appendChild(cursor);
+
 
 
         function escribir() {
@@ -871,23 +1195,36 @@ function escribirTexto(elemento, texto) {
                 return;
             }
 
+
             cursor.before(
-                document.createTextNode(texto[i])
+                document.createTextNode(
+                    texto[i]
+                )
             );
+
 
             i++;
 
-            setTimeout(escribir, velocidadTexto);
+
+            setTimeout(
+                escribir,
+                velocidadTexto
+            );
+
         }
 
+
         escribir();
+
     });
+
 }
 
 
-/* =====================================================
+
+/* ==================================================
    ESPERAR
-===================================================== */
+================================================== */
 
 function esperar(ms) {
 
@@ -896,36 +1233,14 @@ function esperar(ms) {
         setTimeout(resolve, ms);
 
     });
+
 }
 
 
-/* =====================================================
-   MÚSICA PRINCIPAL
-===================================================== */
 
-let musicaActual = beautifulStranger;
-
-
-/* Beautiful Stranger termina → Valentine */
-
-beautifulStranger.addEventListener("ended", () => {
-
-    if (musicaActual === beautifulStranger) {
-
-        musicaActual = valentine;
-
-        valentine.currentTime = 0;
-
-        valentine.play().catch(() => {});
-
-    }
-
-});
-
-
-/* =====================================================
+/* ==================================================
    INICIO
-===================================================== */
+================================================== */
 
 async function iniciar() {
 
@@ -939,60 +1254,94 @@ async function iniciar() {
 iniciar();
 
 
-/* =====================================================
-   BOTÓN ACEPTAR
-===================================================== */
 
-acceptButton.addEventListener("click", async () => {
+/* ==================================================
+   ACEPTAR
+================================================== */
 
-    /*
-       Este click permite iniciar audio
-       en Safari/iPhone.
-    */
-
-    beautifulStranger.currentTime = 0;
-
-    musicaActual = beautifulStranger;
-
-    beautifulStranger.play().catch(() => {});
+acceptButton.addEventListener(
+    "click",
+    async () => {
 
 
-    intro.classList.add("fadeOut");
+        /*
+           El click permite reproducir audio
+           en Safari/iPhone.
+        */
 
-    await esperar(700);
+        beautifulStranger.currentTime = 0;
 
-    intro.style.display = "none";
+        musicaActual =
+            beautifulStranger;
 
-    story.style.display = "block";
-
-    await mostrarParte(2);
-
-});
+        beautifulStranger
+            .play()
+            .catch(() => {});
 
 
-/* =====================================================
-   MOSTRAR PARTES
-===================================================== */
+        intro.classList.add(
+            "fadeOut"
+        );
+
+
+        await esperar(700);
+
+
+        intro.style.display =
+            "none";
+
+
+        story.style.display =
+            "block";
+
+
+        await mostrarParte(2);
+
+    }
+);
+
+
+
+/* ==================================================
+   MOSTRAR PARTE
+================================================== */
 
 async function mostrarParte(numero) {
 
-    const partes = document.querySelectorAll(".part");
 
-    partes.forEach(p => {
+    const partes =
+        document.querySelectorAll(
+            ".part"
+        );
 
-        p.classList.remove("active");
+
+    partes.forEach(parte => {
+
+        parte.classList.remove(
+            "active"
+        );
 
     });
 
 
-    const parte =
-        document.getElementById("part" + numero);
 
-    parte.classList.add("active");
+    const parte =
+        document.getElementById(
+            "part" + numero
+        );
+
+
+    parte.classList.add(
+        "active"
+    );
+
 
 
     const texto =
-        parte.querySelector(".part-text");
+        parte.querySelector(
+            ".part-text"
+        );
+
 
 
     await escribirTexto(
@@ -1001,10 +1350,16 @@ async function mostrarParte(numero) {
     );
 
 
-    await esperar(pausaLectura);
+
+    await esperar(
+        pausaLectura
+    );
 
 
-    /* SCREAMER DESPUÉS DE PARTE 4 */
+
+    /*
+       SCREAMER DESPUÉS DE PARTE 4
+    */
 
     if (numero === 4) {
 
@@ -1017,7 +1372,10 @@ async function mostrarParte(numero) {
     }
 
 
-    /* ENCUESTA DESPUÉS DE PARTE 7 */
+
+    /*
+       ENCUESTA DESPUÉS DE PARTE 7
+    */
 
     if (numero === 7) {
 
@@ -1030,15 +1388,24 @@ async function mostrarParte(numero) {
     }
 
 
-    /* SIGUIENTE PARTE */
+
+    /*
+       SIGUIENTE PARTE
+    */
 
     if (numero < 11) {
 
-        await mostrarParte(numero + 1);
+        await mostrarParte(
+            numero + 1
+        );
 
-    } else {
+    }
 
-        await esperar(pausaLectura);
+    else {
+
+        await esperar(
+            pausaLectura
+        );
 
         mostrarFinal();
 
@@ -1047,88 +1414,138 @@ async function mostrarParte(numero) {
 }
 
 
-/* =====================================================
+
+/* ==================================================
    SCREAMER
-===================================================== */
+================================================== */
 
 async function ejecutarScreamer() {
 
+
     /*
-       Guardamos exactamente dónde estaba
-       la canción.
+       Guardamos el segundo exacto
+       donde quedó la canción.
     */
 
     const posicion =
         musicaActual.currentTime;
 
 
+
+    /*
+       Pausamos la canción principal.
+    */
+
     musicaActual.pause();
 
 
-    story.style.display = "none";
 
-    screamer.style.display = "flex";
+    story.style.display =
+        "none";
 
+
+    screamer.style.display =
+        "flex";
+
+
+
+    /*
+       Sonido del screamer.
+    */
 
     screamerAudio.currentTime = 0;
 
-    screamerAudio.play().catch(() => {});
+    screamerAudio
+        .play()
+        .catch(() => {});
 
+
+
+    /*
+       Esperamos a que termine.
+    */
 
     await new Promise(resolve => {
 
         screamerAudio.addEventListener(
             "ended",
             resolve,
-            { once: true }
+            {
+                once: true
+            }
         );
 
     });
 
 
+
     screamerAudio.currentTime = 0;
 
-    screamer.style.display = "none";
-
-    story.style.display = "block";
 
 
     /*
-       Regresa exactamente al punto anterior.
+       Quitamos screamer.
     */
 
-    musicaActual.currentTime = posicion;
+    screamer.style.display =
+        "none";
 
-    musicaActual.play().catch(() => {});
+
+    story.style.display =
+        "block";
+
+
+
+    /*
+       Continuamos la canción
+       exactamente donde estaba.
+    */
+
+    musicaActual.currentTime =
+        posicion;
+
+    musicaActual
+        .play()
+        .catch(() => {});
 
 }
 
 
-/* =====================================================
+
+/* ==================================================
    ENCUESTA
-===================================================== */
+================================================== */
 
 let preguntaActual = 0;
 
 let respuestasCorrectas = 0;
 
 
+
 async function ejecutarQuiz() {
 
+
     /*
-       Guardamos dónde quedó la canción.
+       Guardamos la posición
+       de la canción.
     */
 
     const posicion =
         musicaActual.currentTime;
 
 
+
     musicaActual.pause();
 
 
-    story.style.display = "none";
 
-    quiz.style.display = "block";
+    story.style.display =
+        "none";
+
+
+    quiz.style.display =
+        "block";
+
 
 
     preguntaActual = 0;
@@ -1136,190 +1553,300 @@ async function ejecutarQuiz() {
     respuestasCorrectas = 0;
 
 
+
     const preguntas =
-        document.querySelectorAll(".question");
-
-
-    preguntas.forEach((pregunta, index) => {
-
-        pregunta.classList.toggle(
-            "active",
-            index === 0
+        document.querySelectorAll(
+            ".question"
         );
 
-    });
+
+
+    preguntas.forEach(
+        (pregunta, index) => {
+
+            pregunta.classList.toggle(
+                "active",
+                index === 0
+            );
+
+        }
+    );
+
 
 
     const resultado =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
 
-    resultado.style.display = "none";
 
-    resultado.textContent = "";
+    resultado.style.display =
+        "none";
 
+
+    resultado.textContent =
+        "";
+
+
+
+    /*
+       Música especial de la encuesta.
+    */
 
     quizAudio.currentTime = 0;
 
-    quizAudio.play().catch(() => {});
+    quizAudio
+        .play()
+        .catch(() => {});
+
 
 
     return new Promise(resolve => {
 
-        window.finalizarQuiz = async () => {
 
-            quizAudio.pause();
-
-            quizAudio.currentTime = 0;
+        window.finalizarQuiz =
+            async function() {
 
 
-            let mensaje;
+                quizAudio.pause();
+
+                quizAudio.currentTime = 0;
 
 
-            if (respuestasCorrectas === 3) {
 
-                mensaje =
-                    "te ganaste 100 robux🔥";
-
-            }
-
-            else if (
-                respuestasCorrectas === 1 ||
-                respuestasCorrectas === 2
-            ) {
-
-                mensaje =
-                    "mm no me conoces al 100, mereces q te robe a ragatha 👻";
-
-            }
-
-            else {
-
-                mensaje =
-                    "si ok me odias si ok entiendo 😿";
-
-            }
+                let mensaje;
 
 
-            resultado.textContent = mensaje;
 
-            resultado.style.display = "block";
+                /*
+                   3 CORRECTAS
+                */
 
+                if (
+                    respuestasCorrectas === 3
+                ) {
 
-            /*
-               Dejamos 5 segundos para leer
-               el resultado.
-            */
+                    mensaje =
+                        "te ganaste 100 robux🔥";
 
-            await esperar(5000);
-
-
-            quiz.style.display = "none";
-
-            story.style.display = "block";
+                }
 
 
-            /*
-               Continúa exactamente donde estaba.
-            */
 
-            musicaActual.currentTime = posicion;
+                /*
+                   1 O 2 CORRECTAS
+                */
 
-            musicaActual.play().catch(() => {});
+                else if (
+                    respuestasCorrectas === 1 ||
+                    respuestasCorrectas === 2
+                ) {
+
+                    mensaje =
+                        "mm no me conoces al 100, mereces q te robe a ragatha 👻";
+
+                }
 
 
-            resolve();
 
-        };
+                /*
+                   0 CORRECTAS
+                */
+
+                else {
+
+                    mensaje =
+                        "si ok me odias si ok entiendo 😿";
+
+                }
+
+
+
+                resultado.textContent =
+                    mensaje;
+
+
+                resultado.style.display =
+                    "block";
+
+
+
+                /*
+                   5 segundos para leer
+                   el resultado.
+                */
+
+                await esperar(5000);
+
+
+
+                quiz.style.display =
+                    "none";
+
+
+                story.style.display =
+                    "block";
+
+
+
+                /*
+                   Continuamos exactamente
+                   donde estaba la canción.
+                */
+
+                musicaActual.currentTime =
+                    posicion;
+
+
+                musicaActual
+                    .play()
+                    .catch(() => {});
+
+
+
+                resolve();
+
+            };
 
     });
 
 }
 
 
-/* =====================================================
-   BOTONES DE RESPUESTAS
-===================================================== */
+
+/* ==================================================
+   RESPUESTAS
+================================================== */
 
 document
     .querySelectorAll(".option")
     .forEach(boton => {
 
-        boton.addEventListener("click", async () => {
 
-            const pregunta =
-                boton.closest(".question");
-
-
-            const opciones =
-                pregunta.querySelectorAll(".option");
+        boton.addEventListener(
+            "click",
+            async () => {
 
 
-            opciones.forEach(opcion => {
-
-                opcion.disabled = true;
-
-            });
-
-
-            if (
-                boton.dataset.correct === "true"
-            ) {
-
-                respuestasCorrectas++;
-
-            }
+                const pregunta =
+                    boton.closest(
+                        ".question"
+                    );
 
 
-            await esperar(600);
+                const opciones =
+                    pregunta.querySelectorAll(
+                        ".option"
+                    );
 
 
-            pregunta.classList.remove("active");
+                /*
+                   Evita múltiples clicks.
+                */
+
+                opciones.forEach(
+                    opcion => {
+
+                        opcion.disabled =
+                            true;
+
+                    }
+                );
 
 
-            preguntaActual++;
+
+                /*
+                   Comprobar respuesta.
+                */
+
+                if (
+                    boton.dataset.correct ===
+                    "true"
+                ) {
+
+                    respuestasCorrectas++;
+
+                }
 
 
-            const preguntas =
-                document.querySelectorAll(".question");
+
+                await esperar(600);
 
 
-            if (
-                preguntaActual < preguntas.length
-            ) {
 
-                preguntas[
-                    preguntaActual
-                ].classList.add("active");
-
-            }
-
-            else {
-
-                await esperar(500);
+                pregunta.classList.remove(
+                    "active"
+                );
 
 
-                if (window.finalizarQuiz) {
+                preguntaActual++;
 
-                    window.finalizarQuiz();
+
+
+                const preguntas =
+                    document.querySelectorAll(
+                        ".question"
+                    );
+
+
+
+                /*
+                   Siguiente pregunta.
+                */
+
+                if (
+                    preguntaActual <
+                    preguntas.length
+                ) {
+
+                    preguntas[
+                        preguntaActual
+                    ].classList.add(
+                        "active"
+                    );
+
+                }
+
+
+
+                /*
+                   Ya terminó la encuesta.
+                */
+
+                else {
+
+                    await esperar(500);
+
+
+                    if (
+                        window.finalizarQuiz
+                    ) {
+
+                        window.finalizarQuiz();
+
+                    }
 
                 }
 
             }
-
-        });
+        );
 
     });
 
 
-/* =====================================================
+
+/* ==================================================
    FINAL
-===================================================== */
+================================================== */
 
 function mostrarFinal() {
 
-    story.style.display = "none";
+    story.style.display =
+        "none";
 
-    final.style.display = "flex";
+
+    final.style.display =
+        "flex";
 
 }
 
